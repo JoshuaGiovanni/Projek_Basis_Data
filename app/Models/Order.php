@@ -38,4 +38,32 @@ class Order extends Model
     {
         return $this->hasOne(Review::class, 'order_id', 'order_id');
     }
+
+    public function deliverable()
+    {
+        return $this->hasOne(Deliverable::class, 'order_id', 'order_id');
+    }
+
+    public function updateAnalystAvailability()
+    {
+        $service = $this->service;
+        if ($service && $service->analystProfile) {
+            $service->analystProfile->updateAvailabilityStatus();
+        }
+    }
+
+    protected static function booted()
+    {
+        static::updated(function ($order) {
+            // Update analyst availability when order status changes
+            if ($order->isDirty('status')) {
+                $order->updateAnalystAvailability();
+            }
+        });
+
+        static::created(function ($order) {
+            // Update analyst availability when new order is created
+            $order->updateAnalystAvailability();
+        });
+    }
 }

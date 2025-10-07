@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:150',
+            'username' => 'required|string|max:150',
             'email' => 'required|email|max:150|unique:users,email',
             'password' => 'required|string|min:6',
             'role' => 'required|in:ANALYST,CLIENT',
@@ -28,7 +28,7 @@ class AuthController extends Controller
 
         try {
             $user = User::create([
-                'name' => $request->input('name'),
+                'username' => $request->input('username'),
                 'email' => $request->input('email'),
                 'password_hash' => Hash::make($request->input('password')),
                 'phone' => $request->input('phone'),
@@ -38,7 +38,7 @@ class AuthController extends Controller
             if ($user->role === 'ANALYST') {
                 AnalystProfile::create([
                     'user_id' => $user->user_id,
-                    'full_name' => $user->name,
+                    'full_name' => $user->username,
                     'status' => 'available',
                     'years_of_experience' => 0,
                     'description' => null,

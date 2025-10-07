@@ -16,6 +16,7 @@ class AnalystController extends Controller
             ->get();
             
         return response()->json($analysts);
+
     }
 
     // Get a single analyst's data
@@ -26,5 +27,6 @@ class AnalystController extends Controller
             ->findOrFail($id);
 
         return response()->json($analyst);
+
     }
 }

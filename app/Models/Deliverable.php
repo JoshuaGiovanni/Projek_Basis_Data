@@ -11,13 +11,20 @@ class Deliverable extends Model
 
     protected $primaryKey = 'deliverable_id';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'order_id',
-        'file_url',
+        'submission_link',
+        'submission_note',
         'submitted_at',
         'approved_by_admin',
+    ];
+
+    protected $casts = [
+        'submitted_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function order()
@@ -25,6 +32,10 @@ class Deliverable extends Model
         return $this->belongsTo(Order::class, 'order_id', 'order_id');
     }
 }
+
+
+
+
 
 
 

@@ -30,11 +30,21 @@
             </div>
         </div>
         <div class="flex justify-end">
-            <button type="submit" class="rounded-md bg-green-600 px-4 py-2 text-white">Publish</button>
+            <button type="submit" class="rounded-md bg-green-600 px-4 py-2 text-white" style="background:#001D39">Publish</button>
         </div>
     </form>
     </div>
 @endsection
+
+
+
+
+
+
+
+
+
+
 
 
 

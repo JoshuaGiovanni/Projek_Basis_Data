@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ route('analysts.index') }}" class="text-sm text-gray-500">← Back</a>
+<a href="{{ route('analyst.dashboard') }}" class="text-sm text-gray-500">← Back</a>
 
 <h2 class="mt-2 text-2xl font-semibold">Analyst Profile</h2>
 
@@ -14,16 +14,13 @@
         <div class="mt-4 grid gap-4 md:grid-cols-2">
             <div>
                 <label class="block text-sm font-medium">Full Name</label>
-                <input name="full_name" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="Jane Doe" value="{{ old('full_name', auth()->user()->name) }}" />
+                <input name="full_name" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="Jane Doe" value="{{ old('full_name', $profile->full_name ?? auth()->user()->username) }}" />
             </div>
             <div>
                 <label class="block text-sm font-medium">Professional Title</label>
                 <input name="professional_title" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="Senior Data Scientist" />
             </div>
-            <div>
-                <label class="block text-sm font-medium">Location</label>
-                <input name="location" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="San Francisco, CA" />
-            </div>
+            
             <div>
                 <label class="block text-sm font-medium">Years of Experience</label>
                 <select name="years_of_experience" class="mt-1 w-full rounded-md border px-3 py-2">
@@ -35,7 +32,11 @@
             </div>
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium">Professional Description</label>
-                <textarea name="description" class="mt-1 w-full rounded-md border px-3 py-2" rows="3" placeholder="Describe your expertise, specializations, and what makes you unique as a data analyst..."></textarea>
+                <textarea name="description" class="mt-1 w-full rounded-md border px-3 py-2" rows="3" placeholder="Describe your expertise, specializations, and what makes you unique as a data analyst...">{{ old('description', $profile->description ?? '') }}</textarea>
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Max Ongoing Projects</label>
+                <input name="max_ongoing_orders" type="number" min="1" max="50" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="5" value="{{ old('max_ongoing_orders', $profile->max_ongoing_orders ?? 5) }}" />
             </div>
         </div>
     </section>

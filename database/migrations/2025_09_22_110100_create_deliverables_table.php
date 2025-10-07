@@ -11,9 +11,11 @@ return new class extends Migration
         Schema::create('deliverables', function (Blueprint $table) {
             $table->id('deliverable_id');
             $table->foreignId('order_id')->constrained('orders', 'order_id')->onDelete('cascade');
-            $table->string('file_url', 255);
+            $table->string('submission_link', 500);
+            $table->text('submission_note')->nullable();
             $table->timestamp('submitted_at')->useCurrent();
             $table->boolean('approved_by_admin')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -22,6 +24,10 @@ return new class extends Migration
         Schema::dropIfExists('deliverables');
     }
 };
+
+
+
+
 
 
 

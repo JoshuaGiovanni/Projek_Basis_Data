@@ -15,10 +15,11 @@ class Payment extends Model
 
     protected $fillable = [
         'order_id',
-        'qris_image_url',
+        'amount',
         'payment_date',
-        'payment_status',
-        'escrow_status',
+        'payment_method',
+        'proof_image',
+        'status',
     ];
 
     public function order()

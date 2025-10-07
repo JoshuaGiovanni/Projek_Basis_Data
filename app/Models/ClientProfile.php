@@ -12,7 +12,9 @@ class ClientProfile extends Model
     protected $table = 'client_profile';
 
     protected $primaryKey = 'client_id';
-
+    
+    public $incrementing = false; // Since we're manually setting the primary key
+    
     public $timestamps = false;
 
     protected $fillable = [

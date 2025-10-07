@@ -1,6 +1,66 @@
 /* Custom overrides when using Tailwind CDN */
-.btn-primary{background:#0b0b12;color:#fff;padding:0.75rem 1.25rem;border-radius:0.5rem}
-.card{border:1px solid #e5e7eb;border-radius:1rem;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.btn-primary{background:#0b0d11;color:#fff;padding:0.75rem 1.25rem;border-radius:0.5rem}
+.card{border:1px solid rgba(255,255,255,.08);border-radius:1rem;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));box-shadow:0 10px 40px rgba(0,0,0,.25)}
+body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji"}
+.glow{box-shadow:0 0 0 1px rgba(59,130,246,.15),0 8px 40px rgba(59,130,246,.2)}
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:14px}
+.badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:9999px;color:#fff}
+.muted{color:rgba(255,255,255,.6)}
+.gradient-bg{background:
+    /* soften and lower the glow so it doesn't clash with white text */
+    radial-gradient(700px 480px at 50% 55%, rgba(123,189,232,.28), rgba(11,13,17,0) 65%),
+    /* darker top for stronger contrast, only top 3 shades */
+    linear-gradient(180deg,
+        #001D39 0%,
+        #0A4174 40%,
+        #49769F 100%
+    );
+}
+
+/* Global dark theme overrides for existing Tailwind classes used across views */
+body .bg-white{background-color:rgba(255,255,255,.05)!important}
+body .text-gray-900{color:#ffffff!important}
+body .text-gray-800{color:#e6e6e6!important}
+body .text-gray-700{color:rgba(255,255,255,.85)!important}
+body .text-gray-600{color:rgba(255,255,255,.7)!important}
+body .text-gray-500{color:rgba(255,255,255,.6)!important}
+body .border{border-color:rgba(255,255,255,.1)!important}
+body .border-gray-200{border-color:rgba(255,255,255,.12)!important}
+body .border-gray-300{border-color:rgba(255,255,255,.16)!important}
+body .shadow-sm{box-shadow:0 10px 30px rgba(0,0,0,.25)!important}
+body .ring-1{box-shadow:0 0 0 1px rgba(255,255,255,.08)!important}
+
+/* Light card variant for pages that require white cards (e.g., analysts list) */
+.card-light{background:#ffffff!important;border:1px solid #e5e7eb!important;color:#111827}
+.card-light .text-black{color:#111827!important}
+.card-light .text-gray-900{color:#111827!important}
+.card-light .text-gray-800{color:#1f2937!important}
+.card-light .text-gray-700{color:#374151!important}
+.card-light .text-gray-600{color:#4b5563!important}
+.card-light .text-gray-500{color:#6b7280!important}
+
+/* Glassmorphism container for cards */
+.glass-container{background-color:rgba(255,255,255,0.2)!important;backdrop-filter:blur(10px) saturate(180%);-webkit-backdrop-filter:blur(10px) saturate(180%);border-radius:15px;border:1px solid rgba(255,255,255,0.3);padding:20px;box-shadow:0 8px 32px 0 rgba(0,0,0,0.1)}
+.glass-container .text-black{color:#0b0d11}
+.glass-container .text-gray-800{color:#1f2937}
+.glass-container .text-gray-700{color:#374151}
+.glass-container .text-gray-600{color:#4b5563}
+
+
+/* Form controls: ensure readable text and placeholders across all pages */
+body input, body select, body textarea{background-color:#ffffff!important;color:#0b0d11!important;caret-color:#0b0d11}
+body input::placeholder, body textarea::placeholder{color:#6b7280!important;opacity:1}
+input:disabled, select:disabled, textarea:disabled{color:#6b7280;background-color:#f3f4f6}
+
+/* Force pure white for hamburger icon bars */
+.hamburger-bar{background-color:#ffffff!important}
+
+
+
+
+
+
+
 
 
 

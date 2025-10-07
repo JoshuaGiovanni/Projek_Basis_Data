@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamp('order_date')->useCurrent();
             $table->timestamp('due_date')->nullable();
             $table->decimal('final_amount', 12, 2);
-            $table->enum('status', ['PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'])->default('PENDING');
+            $table->enum('status', ['PENDING', 'IN_PROGRESS', 'SUBMITTED', 'COMPLETED', 'CANCELLED'])->default('PENDING');
         });
 
         // Order Briefs Table
@@ -28,14 +28,15 @@ return new class extends Migration
             $table->timestamp('submitted_at')->useCurrent();
         });
 
-        // Payments Table (Escrow QRIS)
+        // Payments Table
         Schema::create('payments', function (Blueprint $table) {
             $table->id('payment_id');
             $table->foreignId('order_id')->constrained('orders', 'order_id')->onDelete('cascade');
-            $table->string('qris_image_url', 255)->nullable();
+            $table->decimal('amount', 12, 2);
             $table->timestamp('payment_date')->useCurrent();
-            $table->enum('payment_status', ['Success', 'Failed', 'Pending'])->default('Pending');
-            $table->enum('escrow_status', ['HELD', 'RELEASED', 'REFUNDED'])->default('HELD');
+            $table->string('payment_method', 50)->default('QR_CODE');
+            $table->string('proof_image', 255)->nullable();
+            $table->enum('status', ['PENDING', 'COMPLETED', 'FAILED'])->default('PENDING');
         });
 
         // Reviews Table
