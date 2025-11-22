@@ -83,14 +83,23 @@ class ServiceController extends Controller
     /**
      * Remove the specified service from storage.
      */
-    public function destroy(Service $service)
+    public function destroy($id, Request $request)
     {
-        if ($service->analyst_id !== Auth::id()) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+        $user = $request->user();
+        $analystProfile = AnalystProfile::where('user_id', $user->user_id)->first();
+
+        if (! $analystProfile) {
+            abort(403);
+        }
+
+        $service = Service::where('service_id', $id)->firstOrFail();
+
+        if ($service->analyst_id !== $analystProfile->analyst_id) {
+            abort(403);
         }
 
         $service->delete();
 
-        return response()->json(null, 204);
+        return redirect()->back()->with('success', 'Service deleted successfully.');
     }
 }

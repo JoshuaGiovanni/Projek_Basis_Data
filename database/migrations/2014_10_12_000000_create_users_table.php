@@ -13,7 +13,8 @@ return new class extends Migration
             $table->string('username', 100); // Matches schema
             $table->string('email', 191)->unique(); // Matches schema
             $table->string('password_hash', 255); // Matches schema
-            $table->string('phone', 30)->nullable(); // Matches schema
+            $table->string('phone', 30)->nullable();// Matches schema
+            $table->date('birthdate')->nullable();
             $table->enum('role', ['ANALYST', 'CLIENT', 'ADMIN']); // Matches schema
             $table->timestamps(); // Matches schema: created_at
         });

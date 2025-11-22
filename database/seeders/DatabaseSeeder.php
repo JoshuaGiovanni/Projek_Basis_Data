@@ -26,10 +26,20 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@example.com',
             'role' => 'ADMIN',
+            'birthdate' => fake()->dateTimeBetween('-60 years', '-25 years')->format('Y-m-d')
         ]);
 
         // Create some clients
-        $clients = User::factory()->count(5)->state(['role' => 'CLIENT'])->create();
+        $clients = User::factory()
+            ->count(5)
+            ->state(['role' => 'CLIENT'])
+            ->create()
+            ->each(function ($client) {
+                $client->update([
+                    'birthdate' => fake()->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d')
+                ]);
+            });
+
         $clientProfiles = [];
         foreach ($clients as $client) {
             $clientProfile = ClientProfile::create([
@@ -42,7 +52,16 @@ class DatabaseSeeder extends Seeder
         }
 
         // Create many analysts with profiles and services
-        $analysts = User::factory()->count(8)->state(['role' => 'ANALYST'])->create();
+        $analysts = User::factory()
+            ->count(8)
+            ->state(['role' => 'ANALYST'])
+            ->create()
+            ->each(function ($analyst) {
+                $analyst->update([
+                    'birthdate' => fake()->dateTimeBetween('-60 years', '-22 years')->format('Y-m-d')
+                ]);
+            });
+
         $analystProfiles = [];
         $services = [];
         
@@ -89,7 +108,13 @@ class DatabaseSeeder extends Seeder
                     'description' => fake()->paragraph(),
                     'price_min' => $min,
                     'price_max' => $max,
-                    'category' => fake()->randomElement(['Analytics','BI','ETL','ML','Reporting']),
+                    'category' => fake()->randomElement([
+                        'BI & Visualization',
+                        'Statistical Analysis',
+                        'ML/AI',
+                        'Data Engineering',
+                        'Consultation'
+                    ]),
                 ]);
                 $services[] = $service;
             }

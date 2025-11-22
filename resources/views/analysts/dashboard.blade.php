@@ -112,6 +112,11 @@
                 <div class="font-medium text-white">{{ $service->title }}</div>
                 <div class="text-sm muted">{{ $service->category }}</div>
                 <div class="text-sm text-gray-300">Rp {{ number_format($service->price_min, 0, ',', '.') }} - Rp {{ number_format($service->price_max, 0, ',', '.') }}</div>
+                <form action="{{ route('analyst.service.destroy', $service->service_id) }}" method="POST" onsubmit="return confirm('Delete this service?');" class="inline-block mt-2">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-sm rounded px-2 py-1 bg-red-50 text-red-700 hover:bg-red-100">Delete</button>
+                </form>
             </div>
             @empty
             <div class="text-sm text-gray-600">No services yet.</div>

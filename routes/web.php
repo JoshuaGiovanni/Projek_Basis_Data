@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\AnalystServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -260,6 +261,11 @@ Route::post('/analyst/services', function (Request $request) {
     ]);
     return redirect()->route('analyst.dashboard');
 })->name('analyst.service.store');
+
+// Delete service (only owner analyst can delete) handled in AnalystServiceController
+Route::delete('analyst/services/{service}', [AnalystServiceController::class, 'destroy'])
+    ->name('analyst.service.destroy')
+    ->middleware('auth');
 
 // Booking page: client decides final amount, reminder to contact analyst first
 Route::get('/orders/book/{service}', function (Service $service) {

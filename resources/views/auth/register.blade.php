@@ -62,6 +62,13 @@
                 @error('phone')<div class="mt-1 text-sm text-red-400">{{ $message }}</div>@enderror
             </div>
         </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-300">Birthdate</label>
+                <input name="birthdate" type="date"
+                       class="mt-1 w-full rounded-md border border-white/10 bg-white/10 px-4 py-2 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                       value="{{ old('birthdate') }}" />
+                @error('birthdate')<div class="mt-1 text-sm text-red-400">{{ $message }}</div>@enderror
+            </div>
 
         <!-- Submit Button updated to match login -->
         <button type="submit" class="w-full rounded-lg bg-gray-900 py-3 text-white text-lg font-semibold transition hover:bg-gray-800">

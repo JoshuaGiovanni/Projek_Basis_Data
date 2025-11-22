@@ -15,7 +15,13 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price_min', 12, 2);
             $table->decimal('price_max', 12, 2);
-            $table->string('category', 100)->nullable();
+            $table->enum('category', [
+                'BI & Visualization',
+                'Statistical Analysis',
+                'ML/AI',
+                'Data Engineering',
+                'Consultation'
+            ])->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }

@@ -13,7 +13,14 @@
         </div>
         <div>
             <label class="block text-sm font-medium">Category</label>
-            <input name="category" class="mt-1 w-full rounded-md border px-3 py-2" />
+            <select name="category" class="mt-1 w-full rounded-md border px-3 py-2">
+        <option value="">-- Select Category --</option>
+        <option value="BI & Visualization" {{ old('category') === 'BI & Visualization' ? 'selected' : '' }}>BI & Visualization</option>
+        <option value="Statistical Analysis" {{ old('category') === 'Statistical Analysis' ? 'selected' : '' }}>Statistical Analysis</option>
+        <option value="ML/AI" {{ old('category') === 'ML/AI' ? 'selected' : '' }}>ML/AI</option>
+        <option value="Data Engineering" {{ old('category') === 'Data Engineering' ? 'selected' : '' }}>Data Engineering</option>
+        <option value="Consultation" {{ old('category') === 'Consultation' ? 'selected' : '' }}>Consultation</option>
+    </select>
         </div>
         <div>
             <label class="block text-sm font-medium">Description</label>

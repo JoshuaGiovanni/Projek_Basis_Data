@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class AnalystController extends Controller
+
 {
     // Get all users who are analysts and their profiles
     public function index()
@@ -29,4 +30,6 @@ class AnalystController extends Controller
         return response()->json($analyst);
 
     }
+
+    
 }

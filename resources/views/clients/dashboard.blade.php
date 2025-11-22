@@ -67,7 +67,7 @@
                                     Proof submitted: 
                                     <a href="{{ \Illuminate\Support\Str::startsWith($payment->proof_image, ['http://','https://']) ? $payment->proof_image : asset($payment->proof_image) }}" target="_blank" class="text-blue-600 underline">View proof</a><br>
                                 @endif
-                                Submitted: {{ $payment->payment_date?->format('M d, Y \a\t g:i A') ?? 'Unknown' }}
+                
                             </div>
                         </div>
                         <span class="inline-flex items-center px-2.5 py-1.5 text-xs font-medium rounded text-yellow-800 bg-yellow-100">Pending Verification</span>
