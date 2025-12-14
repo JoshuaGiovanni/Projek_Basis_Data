@@ -20,6 +20,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
             'role' => 'required|in:ANALYST,CLIENT',
             'phone' => 'nullable|string|max:20',
+            'years_of_experience' => 'required_if:role,ANALYST|nullable|integer|min:0',
         ]);
 
         if ($validator->fails()) {
@@ -40,7 +41,7 @@ class AuthController extends Controller
                     'user_id' => $user->user_id,
                     'full_name' => $user->username,
                     'status' => 'available',
-                    'years_of_experience' => 0,
+                    'years_of_experience' => $request->input('years_of_experience', 0),
                     'description' => null,
                     'skills' => [],
                     'average_rating' => 0.00,

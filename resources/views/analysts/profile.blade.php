@@ -16,19 +16,11 @@
                 <label class="block text-sm font-medium">Full Name</label>
                 <input name="full_name" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="Jane Doe" value="{{ old('full_name', $profile->full_name ?? auth()->user()->username) }}" />
             </div>
-            <div>
-                <label class="block text-sm font-medium">Professional Title</label>
-                <input name="professional_title" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="Senior Data Scientist" />
-            </div>
+
             
             <div>
                 <label class="block text-sm font-medium">Years of Experience</label>
-                <select name="years_of_experience" class="mt-1 w-full rounded-md border px-3 py-2">
-                    <option value="0">0</option>
-                    <option value="2">2</option>
-                    <option value="4">4</option>
-                    <option value="6">6</option>
-                </select>
+                <input name="years_of_experience" type="number" min="0" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="e.g. 5" value="{{ old('years_of_experience', $profile->years_of_experience) }}" />
             </div>
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium">Professional Description</label>
@@ -45,10 +37,9 @@
         <h3 class="font-semibold">Skills & Expertise</h3>
         <p class="text-sm text-gray-600">Add your technical skills and areas of expertise</p>
         <div class="mt-3 flex items-center gap-2">
-            <input name="skills" class="w-full rounded-md border px-3 py-2" placeholder="Comma separated: Python, Machine Learning" />
+            <input name="skills" class="w-full rounded-md border px-3 py-2" placeholder="Comma separated: Python, Machine Learning" value="{{ old('skills', is_array($profile->skills) ? implode(', ', $profile->skills) : $profile->skills) }}" />
             <button class="rounded-md border px-3 py-2">➕</button>
         </div>
-        <div class="mt-3 text-sm text-gray-600">None added yet</div>
     </section>
 
     <div class="flex justify-end">

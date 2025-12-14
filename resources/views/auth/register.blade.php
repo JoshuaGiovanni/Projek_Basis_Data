@@ -46,13 +46,21 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-300">Role</label>
-                <select name="role"
+                <select name="role" id="roleSelect"
                         class="mt-1 w-full rounded-md border border-white/10 bg-white/10 px-4 py-2 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                         required>
                     <option value="CLIENT" {{ old('role') === 'CLIENT' ? 'selected' : '' }}>Client</option>
                     <option value="ANALYST" {{ old('role') === 'ANALYST' ? 'selected' : '' }}>Analyst</option>
                 </select>
                 @error('role')<div class="mt-1 text-sm text-red-400">{{ $message }}</div>@enderror
+            </div>
+            
+            <div id="experienceField" class="hidden">
+                <label class="block text-sm font-medium text-gray-300">Years of Experience</label>
+                <input name="years_of_experience" type="number" min="0"
+                       class="mt-1 w-full rounded-md border border-white/10 bg-white/10 px-4 py-2 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                       placeholder="e.g. 3" value="{{ old('years_of_experience') }}" />
+                @error('years_of_experience')<div class="mt-1 text-sm text-red-400">{{ $message }}</div>@enderror
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-300">Phone</label>
@@ -108,6 +116,22 @@ document.addEventListener('DOMContentLoaded', () => {
                   d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                <circle cx="12" cy="12" r="3" />`;
     });
+
+    // Role toggle logic
+    const roleSelect = document.getElementById('roleSelect');
+    const experienceField = document.getElementById('experienceField');
+
+    function toggleExperience() {
+        if (roleSelect.value === 'ANALYST') {
+            experienceField.classList.remove('hidden');
+        } else {
+            experienceField.classList.add('hidden');
+        }
+    }
+
+    roleSelect.addEventListener('change', toggleExperience);
+    // Run on load in case validation failed and we're showing old input
+    toggleExperience();
 });
 </script>
 @endsection

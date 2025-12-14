@@ -176,14 +176,18 @@ Route::post('/analyst/profile', function (Request $request) {
         'status' => 'nullable|in:available,unavailable',
         'skills' => 'nullable|string',
         'location' => 'nullable|string|max:150',
-        'professional_title' => 'nullable|string|max:150',
         'max_ongoing_orders' => 'nullable|integer|min:1|max:50',
     ]);
 
     // Persist core columns; store extra UI fields in description/skills JSON
     $profile = AnalystProfile::firstOrCreate(['user_id' => $user->user_id]);
     $profile->full_name = $data['full_name'];
-    $profile->years_of_experience = $data['years_of_experience'] ?? 0;
+    
+    // Explicitly handle years of experience
+    if ($request->has('years_of_experience')) {
+        $profile->years_of_experience = $request->input('years_of_experience');
+    }
+    
     $profile->description = $data['description'] ?? null;
     $profile->status = $data['status'] ?? 'available';
     if (isset($data['max_ongoing_orders'])) {

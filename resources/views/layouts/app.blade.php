@@ -25,9 +25,24 @@
                 </span>
             </a>
             </div>
-            <nav class="flex items-center gap-3">
-                <a href="{{ route('login') }}" class="px-3 py-1.5 text-sm text-gray-300 hover:text-white border-white/0 hover:border-white/100 border-b-2">Sign In</a>
-                <a href="{{ route('register') }}" class="inline-flex items-center rounded-md bg-blue-500/20 border-2 border-blue-500 px-3 py-1.5 text-sm text-blue-300 hover:bg-blue-500/30 transition">Sign Up</a>
+            <nav class="flex items-center gap-4">
+                @auth
+                    <div class="flex items-center gap-4">
+                        <span class="text-sm font-medium text-gray-300">
+                            <span class="text-blue-400">{{ auth()->user()->role }}:</span> {{ auth()->user()->username }}
+                        </span>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="rounded-md border border-white/20 px-3 py-1.5 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition">
+                                Sign Out
+                            </button>
+                        </form>
+                    </div>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}" class="px-3 py-1.5 text-sm text-gray-300 hover:text-white border-white/0 hover:border-white/100 border-b-2">Sign In</a>
+                    <a href="{{ route('register') }}" class="inline-flex items-center rounded-md bg-blue-500/20 border-2 border-blue-500 px-3 py-1.5 text-sm text-blue-300 hover:bg-blue-500/30 transition">Sign Up</a>
+                @endguest
             </nav>
         </div>
     </header>
