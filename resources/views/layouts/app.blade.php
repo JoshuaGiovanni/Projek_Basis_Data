@@ -43,7 +43,6 @@
                         <span class="cloud"></span>
                     </span>
                 </label>
-
                 @auth
                     <div class="flex items-center gap-4">
                         <span class="text-sm font-medium text-gray-300">

@@ -1,9 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mb-6">
-    <h2 class="text-2xl font-semibold">Payment Management</h2>
-    <p class="text-sm text-gray-600 mt-1">Review all payment confirmations and proof images</p>
+<div class="mb-6 flex justify-between items-center">
+    <div>
+        <h2 class="text-2xl font-semibold">Payment Management</h2>
+        <p class="text-sm text-gray-600 mt-1">Review all payment confirmations and proof images</p>
+    </div>
+    <a href="{{ route('analytics.dashboard') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-sm">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+        Analytics Dashboard
+    </a>
 </div>
 
 @if (session('status'))
@@ -43,22 +51,22 @@
 @endif
 
 <div class="bg-white rounded-lg border overflow-hidden">
-    <div class="px-6 py-4 border-b bg-gray-50" style="background:#001D39">
-        <h3 class="text-lg font-medium text-white" >All Payments</h3>
+    <div class="px-6 py-4 border-b bg-[#001D39] [.theme-light_&]:bg-white [.theme-light_&]:border-b-gray-200">
+        <h3 class="text-lg font-medium text-white [.theme-light_&]:text-gray-900">All Payments</h3>
     </div>
 
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50" style="background:#001D39">
+            <thead class="bg-[#001D39] [.theme-light_&]:bg-gray-100">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Order</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Client</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Service</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Amount</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Payment Date</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Proof</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider text-gray-300 [.theme-light_&]:text-gray-500">Order</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider text-gray-300 [.theme-light_&]:text-gray-500">Client</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider text-gray-300 [.theme-light_&]:text-gray-500">Service</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider text-gray-300 [.theme-light_&]:text-gray-500">Amount</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider text-gray-300 [.theme-light_&]:text-gray-500">Payment Date</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider text-gray-300 [.theme-light_&]:text-gray-500">Proof</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider text-gray-300 [.theme-light_&]:text-gray-500">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-white-500 uppercase tracking-wider text-gray-300 [.theme-light_&]:text-gray-500">Actions</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">

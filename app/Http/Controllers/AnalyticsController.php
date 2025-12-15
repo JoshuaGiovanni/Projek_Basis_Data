@@ -10,6 +10,12 @@ class AnalyticsController extends Controller
 {
     public function index(Request $request)
     {
+        // Authorization Check
+        $user = \Illuminate\Support\Facades\Auth::user();
+        if (!$user || $user->role !== 'ADMIN') {
+            return redirect()->route('login')->with('error', 'Admin access required.');
+        }
+
         // Default range: Last 30 days
         $startDate = $request->input('start_date', Carbon::now()->subDays(30)->format('Y-m-d'));
         $endDate = $request->input('end_date', Carbon::now()->format('Y-m-d'));
