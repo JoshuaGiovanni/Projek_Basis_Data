@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DataMate</title>
+    <script>
+        // Immediately check theme to prevent FOUC
+        if(localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('theme-light');
+            document.body.classList.add('theme-light');
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
@@ -17,7 +24,7 @@
                     <span class="block w-5 h-1 rounded-full hamburger-bar mb-1"></span>
                     <span class="block w-5 h-1 rounded-full hamburger-bar"></span>
                 </button>
-                <a href="{{ route('home') }}" class="flex items-center gap-2 group">
+            <a href="{{ route('home') }}" class="flex items-center gap-2 group">
                 <img src="{{ asset('images/logo.png') }}" alt="DataMate Logo"
                     class="h-12 w-auto brightness-110 drop-shadow-[0_0_10px_#2563EB] transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_18px_#3B82F6]" />
                 <span class="text-xl font-bold tracking-tight text-white transition-all duration-300 group-hover:text-blue-400">
@@ -26,6 +33,17 @@
             </a>
             </div>
             <nav class="flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <label class="switch relative inline-block w-[4em] h-[2.2em] rounded-[30px] shadow-sm select-none">
+                    <input type="checkbox" id="theme-toggle" class="opacity-0 w-0 h-0">
+                    <span class="slider absolute cursor-pointer inset-0 bg-[#2a2a2a] transition-[0.4s] rounded-[30px] overflow-hidden">
+                        <span class="star star_1 absolute bg-white rounded-full w-[5px] h-[5px] transition-all duration-400 left-[2.5em] top-[0.5em]"></span>
+                        <span class="star star_2 absolute bg-white rounded-full w-[5px] h-[5px] transition-all duration-400 left-[2.2em] top-[1.2em]"></span>
+                        <span class="star star_3 absolute bg-white rounded-full w-[5px] h-[5px] transition-all duration-400 left-[3em] top-[0.9em]"></span>
+                        <span class="cloud"></span>
+                    </span>
+                </label>
+
                 @auth
                     <div class="flex items-center gap-4">
                         <span class="text-sm font-medium text-gray-300">

@@ -20,7 +20,7 @@
             
             <div>
                 <label class="block text-sm font-medium">Years of Experience</label>
-                <input name="years_of_experience" type="number" min="0" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="e.g. 5" value="{{ old('years_of_experience', $profile->years_of_experience) }}" />
+                <input name="years_of_experience" type="number" min="0" class="mt-1 w-full rounded-md border px-3 py-2" placeholder="e.g. 5" value="{{ old('years_of_experience', $profile->years_of_experience ?? 0) }}" />
             </div>
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium">Professional Description</label>

@@ -1,5 +1,26 @@
 // Basic JS placeholder (no build tools)
 document.addEventListener('DOMContentLoaded', function(){
+  // Theme Toggle Logic
+  var themeToggle = document.getElementById('theme-toggle');
+  var body = document.body;
+
+  // Initialize theme from localStorage
+  if(localStorage.getItem('theme') === 'light'){
+    body.classList.add('theme-light');
+    if(themeToggle) themeToggle.checked = true;
+  }
+
+  if(themeToggle){
+    themeToggle.addEventListener('change', function(){
+      if(this.checked){
+        body.classList.add('theme-light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.classList.remove('theme-light');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  }
   // Example: smooth scroll to top on nav brand click
   var brand = document.querySelector('header a[href="/"]');
   if(brand){

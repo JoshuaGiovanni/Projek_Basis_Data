@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\AnalystServiceController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +108,8 @@ Route::post('/admin/payments/{payment}/reject', function (\App\Models\Payment $p
     
     return redirect()->back()->with('status', 'Payment rejected. Client can resubmit payment proof.');
 })->name('admin.payments.reject');
+
+Route::get('/analytics', [\App\Http\Controllers\AnalyticsController::class, 'index'])->name('analytics.dashboard');
 
 // Browse analysts (list services) with search and sort
 Route::get('/analysts', function (Request $request) {
@@ -343,7 +346,8 @@ Route::post('/orders/{order}/reject', function (Order $order) {
 Route::get('/client/dashboard', function () {
     $user = Auth::user();
     if (!$user || $user->role !== 'CLIENT') return redirect()->route('login');
-    $orders = Order::where('client_id', $user->user_id)->with(['service', 'deliverable'])->latest('order_date')->get();
+    // Eager load 'review' to check if order already has a review
+    $orders = Order::where('client_id', $user->user_id)->with(['service', 'deliverable', 'review', 'payment'])->latest('order_date')->get();
     return view('clients.dashboard', compact('orders'));
 })->name('client.dashboard');
 
@@ -497,4 +501,7 @@ Route::post('/orders/{order}/payment', function (Request $request, Order $order)
     
     return redirect()->back()->with('error', 'Payment confirmation and proof image are required.');
 })->name('orders.payment.confirm');
+
+// Review Route
+Route::post('/orders/{order}/review', [ReviewController::class, 'store'])->name('orders.review.store');
 
