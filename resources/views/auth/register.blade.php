@@ -54,6 +54,16 @@
                 </select>
                 @error('role')<div class="mt-1 text-sm text-red-400">{{ $message }}</div>@enderror
             </div>
+
+            <div id="clientTypeField" class="hidden">
+                <label class="block text-sm font-medium text-gray-300">Client Type</label>
+                <select name="client_type"
+                        class="mt-1 w-full rounded-md border border-white/10 bg-white/10 px-4 py-2 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+                    <option value="INDIVIDUAL" {{ old('client_type') === 'INDIVIDUAL' ? 'selected' : '' }}>Individual</option>
+                    <option value="COMPANY" {{ old('client_type') === 'COMPANY' ? 'selected' : '' }}>Company</option>
+                </select>
+                @error('client_type')<div class="mt-1 text-sm text-red-400">{{ $message }}</div>@enderror
+            </div>
             
             <div id="experienceField" class="hidden">
                 <label class="block text-sm font-medium text-gray-300">Years of Experience</label>
@@ -120,18 +130,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Role toggle logic
     const roleSelect = document.getElementById('roleSelect');
     const experienceField = document.getElementById('experienceField');
+    const clientTypeField = document.getElementById('clientTypeField');
 
-    function toggleExperience() {
+    function toggleFields() {
         if (roleSelect.value === 'ANALYST') {
             experienceField.classList.remove('hidden');
+            clientTypeField.classList.add('hidden');
         } else {
             experienceField.classList.add('hidden');
+            clientTypeField.classList.remove('hidden');
         }
     }
 
-    roleSelect.addEventListener('change', toggleExperience);
+    roleSelect.addEventListener('change', toggleFields);
     // Run on load in case validation failed and we're showing old input
-    toggleExperience();
+    toggleFields();
 });
 </script>
 @endsection

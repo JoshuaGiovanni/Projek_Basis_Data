@@ -21,6 +21,7 @@ class AuthController extends Controller
             'role' => 'required|in:ANALYST,CLIENT',
             'phone' => 'nullable|string|max:20',
             'years_of_experience' => 'required_if:role,ANALYST|nullable|integer|min:0',
+            'client_type' => 'required_if:role,CLIENT|in:INDIVIDUAL,COMPANY',
         ]);
 
         if ($validator->fails()) {
@@ -49,7 +50,7 @@ class AuthController extends Controller
             } else {
                 ClientProfile::create([
                     'client_id' => $user->user_id,
-                    'type' => 'INDIVIDUAL',
+                    'type' => $request->input('client_type', 'INDIVIDUAL'),
                     'company_name' => null,
                     'industry' => null,
                 ]);
